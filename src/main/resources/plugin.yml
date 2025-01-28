@@ -1,0 +1,16 @@
+name: PvPServerPlugin
+version: '1.0'
+main: io.github.markmanflame55.pvpserverplugin.PvPServerPlugin
+api-version: '1.21'
+prefix: PVPS
+load: STARTUP
+authors: [ MarkManFlame_55 ]
+description: PvP Server Plugin para Espectral Games
+website: https://discord.gg/y4Y2aYYTY6
+permissions:
+  pvpserver.staff:
+    default: op
+commands:
+  wl:
+    description: Comando principal para el Plugin de PvP Server 1.5
+    permission: pvpserver.staff

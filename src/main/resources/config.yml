@@ -1,0 +1,19 @@
+#
+# PvP Server 1.5 by EspectralGames. Produced By wZqh
+# Plugin by MarkManFlame_55
+
+players:
+  # Tiempo (en segundos) que tendran los jugadores de invulnerabilidad
+  invulnerability-time: 3600
+  # Cantidad Maxima de jugadores que pueden ser Whitelisteados
+  max-players: 100
+  # Miembros del Staff que no vayan a jugar pero si meterse para moderar durante el evento.
+  staff-whitelist:
+    - "Staff Member 1"
+    - "Staff Member 2"
+    - "..."
+  # Jugadores Whitelisted para el evento, de aqui se le si se ha alcanzado el maximo de 100 jugadores.
+  whitelist:
+    - "Player 1"
+    - "Player 2"
+    - "..."
