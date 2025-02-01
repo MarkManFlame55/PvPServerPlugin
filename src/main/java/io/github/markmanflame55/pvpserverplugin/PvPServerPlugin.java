@@ -1,5 +1,6 @@
 package io.github.markmanflame55.pvpserverplugin;
 
+import io.github.markmanflame55.pvpserverplugin.commands.wlCommand;
 import io.github.markmanflame55.pvpserverplugin.events.InvulnerabilityManager;
 import io.github.markmanflame55.pvpserverplugin.events.WhitelistManager;
 import org.bukkit.Bukkit;
@@ -20,6 +21,9 @@ public final class PvPServerPlugin extends JavaPlugin {
         // Plugin startup logic
         saveDefaultConfig();
         plugin = this;
+
+        getCommand("wl").setExecutor(new wlCommand());
+
         manager.registerEvents(new InvulnerabilityManager(), this);
         manager.registerEvents(new WhitelistManager(), this);
 
