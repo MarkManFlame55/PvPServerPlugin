@@ -41,6 +41,7 @@ public class WhitelistManager implements Listener {
             // (A no ser que no queramos, pero con los comandos se pueden borrar de la whitelist)
             if (!whitelist.contains(player.getName())) {
                 whitelist.add(player.getName()); // Añado al jugador en caso de que no estuviera antes.
+                this.config.set("players.whitelist", whitelist);
             }
 
             // A cualquier jugador que entre, le ponemos el contador en caso de que no lo tenga ya.
@@ -59,8 +60,8 @@ public class WhitelistManager implements Listener {
 
         } else {
             // Vuelvo a crear las listas en caso de que las borraran, eso si, sin jugadores :(.
-            this.config.set("player.whitelist", new ArrayList<>());
-            this.config.set("player.staff-whitelist", new ArrayList<>());
+            this.config.set("players.whitelist", new ArrayList<>());
+            this.config.set("players.staff-whitelist", new ArrayList<>());
             this.plugin.saveConfig();
         }
     }
