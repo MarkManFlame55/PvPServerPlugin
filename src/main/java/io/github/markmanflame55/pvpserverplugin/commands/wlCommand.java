@@ -54,6 +54,7 @@ public class wlCommand implements CommandExecutor, TabCompleter {
                 helpMessage.add(commandHelper("/wl removestaff <Player>", "Elimina a un jugador como Staff del Evento"));
                 helpMessage.add(commandHelper("/wl get_invulnerability <Player>", "Muesta los segundos de invulnerabilidad restantes del Jugador"));
                 helpMessage.add(commandHelper("/wl set_invulnerability <Player> <int>", "Cambia los segundos de invulnerabilidad restantes del Jugador"));
+                helpMessage.add(commandHelper("/wl sculknerf <Player> <int>", "Cambia el porcentaje de Nerf del Sculk"));
                 helpMessage.add(commandHelper("/wl help", "Mostrar esta lista"));
                 helpMessage.add(Text.miniMessage("<gold>==================="));
                 for (Component message : helpMessage) {
