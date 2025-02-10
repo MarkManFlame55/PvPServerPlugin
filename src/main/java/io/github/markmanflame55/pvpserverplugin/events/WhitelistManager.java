@@ -11,7 +11,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WhitelistManager implements Listener {
@@ -39,7 +38,9 @@ public class WhitelistManager implements Listener {
         // (A no ser que no queramos, pero con los comandos se pueden borrar de la whitelist)
         if (!whitelist.contains(player.getName())) {
             whitelist.add(player.getName()); // Añado al jugador en caso de que no estuviera antes.
+            this.plugin.getLogger().info("añadiendo a " + player.getName());
             this.config.set("players.whitelist", whitelist);
+            this.plugin.saveConfig();
         }
 
         // A cualquier jugador que entre, le ponemos el contador en caso de que no lo tenga ya.

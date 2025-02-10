@@ -13,6 +13,8 @@ public final class PvPServerPlugin extends JavaPlugin {
 
     static PvPServerPlugin plugin;
     public Logger LOGGER = Bukkit.getLogger();
+    public int sculkNerf = 0;
+
     PluginManager manager = this.getServer().getPluginManager();
 
 

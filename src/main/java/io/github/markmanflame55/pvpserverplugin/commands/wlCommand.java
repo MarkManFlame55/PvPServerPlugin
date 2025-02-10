@@ -31,6 +31,7 @@ public class wlCommand implements CommandExecutor, TabCompleter {
         /wl removestaff <Player>
         /wl get_invulnerability <Player>
         /wl set_invulnerability <Player> <int>
+        /wl sculknerf <new_probability>
         /wl help
 
     */
@@ -54,6 +55,7 @@ public class wlCommand implements CommandExecutor, TabCompleter {
                 helpMessage.add(commandHelper("/wl get_invulnerability <Player>", "Muesta los segundos de invulnerabilidad restantes del Jugador"));
                 helpMessage.add(commandHelper("/wl set_invulnerability <Player> <int>", "Cambia los segundos de invulnerabilidad restantes del Jugador"));
                 helpMessage.add(commandHelper("/wl help", "Mostrar esta lista"));
+                helpMessage.add(Text.miniMessage("<gold>==================="));
                 for (Component message : helpMessage) {
                     commandSender.sendMessage(message);
                 }
@@ -188,6 +190,20 @@ public class wlCommand implements CommandExecutor, TabCompleter {
                         if (commandSender instanceof Player sender) sender.playSound(sender, Sound.BLOCK_NOTE_BLOCK_BIT, 1.0f, 0.1f);
                     }
                 }
+                case "sculk_nerf" -> {
+
+                    // Cambiar la probabildad de Sculk de dropear XP.
+                    // Por defecto el plugin lo tiene a 0, pero por si quieren hacer algun evento, dejo que sea moldeable.
+
+                    if (isNumber(args[1])) {
+                        int prob = Integer.parseInt(args[1]);
+                        this.plugin.sculkNerf = prob;
+                        commandSender.sendMessage(Text.miniMessage("<green>Ahora el Sculk dropea el " + prob + "% de experiencia."));
+                    } else {
+                        commandSender.sendMessage(Text.miniMessage("<red>Argumentos no Validos! Introduce un numero entero positivo!"));
+                    }
+                }
+
                 default -> {
                     commandSender.sendMessage(Text.miniMessage("<red>Argumentos Incorrectos! Mira /wl help para mas informacion sobre los comandos!"));
                     if (commandSender instanceof Player sender) sender.playSound(sender, Sound.BLOCK_NOTE_BLOCK_BIT, 1.0f, 0.1f);
@@ -233,8 +249,8 @@ public class wlCommand implements CommandExecutor, TabCompleter {
 
     private boolean isNumber(String number) {
         try {
-            Integer.parseInt(number);
-            return true;
+            int num = Integer.parseInt(number);
+            return num >= 0;
         } catch (NumberFormatException e) {
             return false;
         }
@@ -246,7 +262,7 @@ public class wlCommand implements CommandExecutor, TabCompleter {
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (strings.length == 1 && commandSender instanceof Player) {
             List<String> completions = new ArrayList<>();
-            StringUtil.copyPartialMatches(strings[0], List.of("add", "remove", "addstaff", "removestaff", "get_invulnerability", "set_invulnerability", "help"), completions);
+            StringUtil.copyPartialMatches(strings[0], List.of("add", "remove", "addstaff", "removestaff", "get_invulnerability", "set_invulnerability", "sculknerf", "help"), completions);
             Collections.sort(completions);
             return completions;
         }
@@ -259,6 +275,9 @@ public class wlCommand implements CommandExecutor, TabCompleter {
             }
             if (strings[0].equals("removestaff")) {
                 return this.config.getStringList("players.staff-whitelist");
+            }
+            if (strings[0].equals("sculknerf")) {
+                return List.of("<new_probability>");
             }
         }
         if (strings.length == 3 && commandSender instanceof Player) {
